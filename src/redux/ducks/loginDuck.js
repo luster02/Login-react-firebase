@@ -17,11 +17,18 @@ import {
     EMAIL_VERIFY,
     EMAIL_VERIFY_SUCCESS,
     EMAIL_VERIFY_ERROR,
+    RESET_PASSWORD,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_ERROR,
+    SIGN_IN_GOOGLE,
+    SIGN_IN_GOOGLE_SUCCESS,
+    SIGN_IN_GOOGLE_ERROR,
 } from '../actions/loginActions'
 
 const initialState = {
     fetching: false,
     logged: false,
+    ok: '',
     user: {},
     error: ''
 }
@@ -140,7 +147,8 @@ export const loginReducer = (state = initialState, actions) => {
         case EMAIL_VERIFY_SUCCESS: 
             return {
                 ...state,
-                fetching: false
+                fetching: false,
+                ok: actions.payload
             }
 
         case EMAIL_VERIFY_ERROR: 
@@ -148,7 +156,48 @@ export const loginReducer = (state = initialState, actions) => {
                 ...state,
                 fetching: false,
                 error: actions.payload
+            }
+        
+        case RESET_PASSWORD: 
+            return {
+                ...state,
+                fetching: true
+            }
+
+        case RESET_PASSWORD_SUCCESS: 
+            return {
+                ...state,
+                fetching: false,
+                ok: actions.payload
+            }
+
+        case RESET_PASSWORD_ERROR: 
+            return {
+                ...state,
+                fetching: false,
+                error: actions.payload
             }   
+        
+        case SIGN_IN_GOOGLE: 
+            return{
+                ...state,
+                fetching: true
+            }
+
+        case SIGN_IN_GOOGLE_SUCCESS: 
+            return{
+                ...state,
+                fetching: false,
+                logged: true
+            }
+
+        case SIGN_IN_GOOGLE_ERROR: 
+            return{
+                ...state,
+                fetching: false,
+                error: actions.payload
+            }
+
 
         
         default: 

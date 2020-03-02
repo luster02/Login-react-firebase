@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { loginAction, getSesionAction } from '../../../redux/actions/loginActions'
+import { loginAction, getSesionAction, signinGoogleAction } from '../../../redux/actions/loginActions'
 import SigninContent from './signinContent'
 
 
-const SigninContainer = ({ fetching, error, loginAction, getSesionAction }) => {
+const SigninContainer = ({ fetching, error, loginAction, getSesionAction, signinGoogleAction }) => {
 
     const handleData = async (data) => {
         const { email, password } = data
@@ -19,6 +19,7 @@ const SigninContainer = ({ fetching, error, loginAction, getSesionAction }) => {
                 onData={handleData}
                 fetching={fetching}
                 error={error}
+                signinGoogleAction={signinGoogleAction}
             />
         </div>
     )
@@ -34,7 +35,8 @@ const mapStateToProps = ({ login }) => {
 
 const actions = {
     loginAction,
-    getSesionAction
+    getSesionAction,
+    signinGoogleAction
 }
 
 export default connect(mapStateToProps, actions)(SigninContainer);

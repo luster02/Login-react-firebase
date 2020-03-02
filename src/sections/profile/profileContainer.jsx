@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getSesionAction, emailVerifyAction } from '../../redux/actions/loginActions'
 import ProfileContent from './profileContent'
 
-const ProfileContainer = ({ fetching, logged, user, getSesionAction, emailVerifyAction }) => {
+const ProfileContainer = ({ fetching, ok, user, getSesionAction, emailVerifyAction }) => {
 
     useEffect(() => {
         getSesionAction()
@@ -20,6 +20,7 @@ const ProfileContainer = ({ fetching, logged, user, getSesionAction, emailVerify
                 fetching={fetching}
                 user={user}
                 onEmailVerify={handleEmailVerify}
+                ok={ok}
             />
         </div>
     )
@@ -29,7 +30,7 @@ const ProfileContainer = ({ fetching, logged, user, getSesionAction, emailVerify
 const mapStateToProps = ({ login }) => {
     return {
         fetching: login.fetching,
-        logged: login.logged,
+        ok: login.ok,
         user: login.user
     }
 }

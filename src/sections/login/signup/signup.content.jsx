@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { enviroments } from '../../../enviroments/enviroments'
 
-const SignupContent = ({ fetching, error, onData }) => {
+const SignupContent = ({ fetching, error, onData, signinGoogleAction }) => {
 
     const inputs = [
         //{ req: true, id: 'displayName', label: 'Your name', Name: 'displayName', reqMess: 'Your name is required', placeholder: 'example name', type: 'text' },
@@ -108,6 +108,12 @@ const SignupContent = ({ fetching, error, onData }) => {
                                     {conditionalButton()}
                                 </form>
                             </div>
+                        </div>
+                        <div className="my-4 text-center">
+                            <button onClick={signinGoogleAction} className="btn btn-outline-info">
+                                <span className="mr-2">Sign in with google</span>
+                                <i className="fab fa-google"></i>
+                            </button>
                         </div>
                         <div className="my-5">
                             {error && <div className="alert alert-danger alert-dismissible fade show" role="alert">

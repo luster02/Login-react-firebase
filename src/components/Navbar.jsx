@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { logoutAction } from '../redux/actions/loginActions'
 import { Link } from 'react-router-dom'
+import { useUser } from 'reactfire'
 
 const Navbar = ({ fetching, logged, logoutAction }) => {
+    const User = useUser()
 
     const loginPath = [
         { name: 'Login', path: '/login' },
@@ -48,17 +50,17 @@ const Navbar = ({ fetching, logged, logoutAction }) => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
-                        {logged
+                        {User
                             ? mapGeneralPath()
                             : mapLoginPath()
                         }
                     </ul>
-                    {logged && 
-                    <button 
-                    onClick={logoutAction}
-                    className="btn btn-outline-danger btn-sm">
-                        logout
-                    </button>
+                    {User &&
+                        <button
+                            onClick={logoutAction}
+                            className="btn btn-outline-danger btn-sm ml-2">
+                            logout
+                        </button>
                     }
                 </div>
             </div>

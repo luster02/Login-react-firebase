@@ -1,15 +1,13 @@
 import React from 'react';
+import { useUser } from 'reactfire';
 import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux'
 
-
-const PrivateRoute = ({component: Component, logged, token, ...rest}) => {
-
-    const user = logged && token
+const PrivateRoute = ({component: Component, ...rest}) => {
+    const User = useUser()
 
     return (
         <Route  {...rest} render={(props) => (
-            !user
+            !User
             ? <Component {...props} />
             : <Redirect to='/' />
         )}
@@ -18,9 +16,4 @@ const PrivateRoute = ({component: Component, logged, token, ...rest}) => {
    
 }
 
-const mapStateToProps = ({login: {logged,user}}) =>({
-    logged,
-    token: user.token,
-})
-
-export default connect(mapStateToProps)(PrivateRoute)
+export default PrivateRoute

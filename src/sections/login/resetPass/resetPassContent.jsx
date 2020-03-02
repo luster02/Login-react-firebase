@@ -1,14 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { useForm } from 'react-hook-form'
 import { enviroments } from '../../../enviroments/enviroments'
-import { Link } from 'react-router-dom'
 
 
-const SigninContent = ({ onData, fetching, error, signinGoogleAction }) => {
+const ResetPassContent = ({fetching, error, onData, ok}) => {
 
     const inputs = [
         { req: true, id: 'email', label: 'Email', Name: 'email', reqMess: 'email is required', placeholder: 'example@email.com', type: 'email', patt: enviroments.pattern },
-        { req: true, id: 'password', label: 'Password', Name: 'password', reqMess: 'please type your password', placeholder: '*******', type: 'password', min: 5, minMess: 'Password must be a minimum of 8 characters' }
     ]
 
     const { register, errors, handleSubmit, } = useForm()
@@ -43,22 +41,14 @@ const SigninContent = ({ onData, fetching, error, signinGoogleAction }) => {
         )
     }
 
-    const renderError = () => {
-        
-        return(
-            error
-            ? <p>{error}</p>
-            : <p>no errors</p>
-        )
-    }
-    
+
     return (
         <div>
             <div className="container">
                 <div className="row my-5 justify-content-center">
                     <div className="col-5">
-                        <p className="h2 text-center mb-4">Sign in</p>
-                        <div className="card card-login">
+                        <p className="h2 text-center mb-5">Reset your password</p>
+                        <div className="card  card-login">
                             <div className="card-body">
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     {inputs.map(({ Name, req, reqMess, placeholder, type, patt, min, minMess, id, label }) => {
@@ -96,22 +86,16 @@ const SigninContent = ({ onData, fetching, error, signinGoogleAction }) => {
                                 </form>
                             </div>
                         </div>
-                        <div className="">
-                            <p className="my-2 text-center">
-                                <Link to="/resetPass" className="btn btn-link">
-                                    I forgot my password
-                                </Link>
-                            </p>            
-                        </div>
-                        <div className="text-center">
-                            <button onClick={signinGoogleAction} className="btn btn-outline-info">
-                                <span className="mr-2">Sign in with google</span>
-                                <i className="fab fa-google"></i>   
-                            </button>        
-                        </div>
                         <div className="my-5">
                             {error && <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                                {renderError()}
+                                {error}
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>}
+                            
+                            {ok && <div className="alert alert -success alert-dismissible fade show" role="alert">
+                                an email has been sent to you please check your inbox
                                 <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -125,4 +109,4 @@ const SigninContent = ({ onData, fetching, error, signinGoogleAction }) => {
 
 }
 
-export default SigninContent;
+export default ResetPassContent

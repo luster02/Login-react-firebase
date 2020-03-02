@@ -6,11 +6,14 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { generateStore } from './redux/store'
+import { FirebaseAppProvider } from 'reactfire'
+import { firebaseConfig } from './firebase'
 
 const store = generateStore()
 
 const AppWithRouter = () => <Router><App/></Router>
-const AppWithRedux = () => <Provider store={store} >< AppWithRouter/></Provider>
+const AppWithFirebase = () => <FirebaseAppProvider firebaseConfig={firebaseConfig} ><AppWithRouter/></FirebaseAppProvider> 
+const AppWithRedux = () => <Provider store={store} >< AppWithFirebase/></Provider>
 
 ReactDOM.render(<AppWithRedux />, document.getElementById('root'));
 
